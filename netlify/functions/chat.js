@@ -1,5 +1,3 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
 exports.handler = async (event) => {
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: "Method Not Allowed" };
@@ -7,25 +5,33 @@ exports.handler = async (event) => {
 
     try {
         const { message } = JSON.parse(event.body);
+        const apiKey = process.env.GEMINI_API_KEY;
         
-        // Initialize with your API Key
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        // This is the direct URL to Google's AI
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: message }] }]
+            })
+        });
+
+        const data = await response.json();
         
-        // Use "gemini-pro" which is the most compatible name for the v1 API
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-        const result = await model.generateContent(message);
-        const response = await result.response;
-        const text = response.text();
-        
+        // Extract the text from Google's specific data structure
+        const aiResponse = data.candidates[0].content.parts[0].text;
+
         return {
             statusCode: 200,
-            body: JSON.stringify({ reply: text }),
+            body: JSON.stringify({ reply: aiResponse }),
         };
     } catch (error) {
-        console.error("AI Bridge Error:", error);
+        console.error("Direct API Error:", error);
         return { 
             statusCode: 500, 
-            body: JSON.stringify({ reply: "Connection failed: " + error.message }) 
+            body: JSON.stringify({ reply: "Connection failed. Please check the API Key in Netlify." }) 
         };
     }
 };
