@@ -1,7 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 exports.handler = async (event) => {
-    // Only allow POST requests (sending data)
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: "Method Not Allowed" };
     }
@@ -9,22 +8,25 @@ exports.handler = async (event) => {
     try {
         const { message } = JSON.parse(event.body);
         
-        // This connects to the secret key we will set in Netlify later
+        // Initialize with your API Key
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        
+        // Use "gemini-pro" which is the most compatible name for the v1 API
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
         const result = await model.generateContent(message);
         const response = await result.response;
+        const text = response.text();
         
         return {
             statusCode: 200,
-            body: JSON.stringify({ reply: response.text() }),
+            body: JSON.stringify({ reply: text }),
         };
     } catch (error) {
         console.error("AI Bridge Error:", error);
         return { 
             statusCode: 500, 
-            body: JSON.stringify({ reply: "I'm having trouble thinking right now. Please check my API connection." }) 
+            body: JSON.stringify({ reply: "Connection failed: " + error.message }) 
         };
     }
 };
