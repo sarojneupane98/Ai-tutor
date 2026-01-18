@@ -12,8 +12,9 @@ exports.handler = async (event) => {
             return { statusCode: 500, body: JSON.stringify({ reply: "Config Error: API Key is missing in Netlify." }) };
         }
 
-        // The exact URL format required for Gemini 1.5 Flash
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+       // The correct URL for the Gemini 2.5 Pro model
+const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`;
+
 
         const response = await fetch(url, {
             method: 'POST',
