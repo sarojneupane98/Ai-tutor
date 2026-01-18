@@ -1,20 +1,25 @@
 exports.handler = async (event) => {
-    if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method Not Allowed" };
+    // Only allow POST requests
+    if (event.httpMethod !== "POST") {
+        return { statusCode: 405, body: "Method Not Allowed" };
+    }
 
     try {
         const { message } = JSON.parse(event.body);
         const apiKey = process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
-            return { statusCode: 500, body: JSON.stringify({ reply: "API Key missing in Netlify." }) };
+            return { statusCode: 500, body: JSON.stringify({ reply: "Config Error: API Key is missing in Netlify." }) };
         }
 
-        // Updated URL: removed the extra 'models/' part from the path
+        // The exact URL format required for Gemini 1.5 Flash
         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
         const response = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
             body: JSON.stringify({
                 contents: [{
                     parts: [{ text: message }]
@@ -24,15 +29,15 @@ exports.handler = async (event) => {
 
         const data = await response.json();
 
-        // Debugging: If Google returns an error, show it
+        // Check if Google returned an error message
         if (data.error) {
             return { 
                 statusCode: 500, 
-                body: JSON.stringify({ reply: "Google says: " + data.error.message }) 
+                body: JSON.stringify({ reply: "Google Error: " + data.error.message }) 
             };
         }
 
-        // Correct path to the text response
+        // Navigate the JSON response to get the text
         const aiResponse = data.candidates[0].content.parts[0].text;
 
         return {
