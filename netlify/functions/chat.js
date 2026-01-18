@@ -12,8 +12,7 @@ exports.handler = async (event) => {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         
         // Use "gemini-pro" which is the most compatible name for the v1 API
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
         const result = await model.generateContent(message);
         const response = await result.response;
         const text = response.text();
