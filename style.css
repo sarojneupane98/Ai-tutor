@@ -1,3 +1,8 @@
+/* ADDED: Global Reset for consistent sizing */
+* {
+    box-sizing: border-box;
+}
+
 :root {
     --bg: #020617;
     --card-bg: rgba(30, 41, 59, 0.7);
@@ -56,7 +61,6 @@ header p { margin: 4px 0 0; font-size: 0.65rem; color: #94a3b8; font-family: 'Je
 .ai-message .text { background: rgba(255,255,255,0.05); border: 1px solid var(--border); }
 .user-message .text { background: var(--accent); color: var(--bg); font-weight: 500; }
 
-/* Typing Dots Animation */
 .typing-dots { display: flex; gap: 4px; padding: 5px 0; }
 .typing-dots span {
     width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
