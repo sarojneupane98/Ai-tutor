@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tutor</title>
+    <title>AI Tutor Pro</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="bg-glow"></div>
     <div class="chat-container">
         <header>
-            <h1>AI Tutor</h1>
-            <p>Your 24/7 Learning Partner</p>
+            <div class="status-badge"><span class="dot"></span> Online</div>
+            <h1>AI<span>Tutor</span></h1>
+            <p>Neural Network Interface v2.6</p>
         </header>
+        
         <div id="chat-box" class="chat-box">
-            <div class="message ai-message">Hello! I am your AI Tutor. How can I help you today?</div>
+            <div class="message ai-message">
+                <div class="avatar">AI</div>
+                <div class="text">System initialized. How can I assist your learning journey today?</div>
+            </div>
         </div>
+
         <div class="input-area">
-            <input type="text" id="user-input" placeholder="Ask me anything...">
-            <button id="send-btn">Send</button>
+            <div class="input-wrapper">
+                <input type="text" id="user-input" placeholder="Enter query..." autocomplete="off">
+                <button id="send-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                </button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
