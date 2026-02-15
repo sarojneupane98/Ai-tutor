@@ -119,3 +119,70 @@ button { background: var(--accent); border: none; width: 40px; height: 40px; bor
     .chat-box { padding: 15px; }
     .input-area { padding-bottom: env(safe-area-inset-bottom, 15px); }
 }
+/* Styling for Markdown Lists */
+.text ul, .text ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.text li {
+    margin-bottom: 5px;
+}
+
+/* Styling for Markdown Tables */
+.text table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.85rem;
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.text th, .text td {
+    padding: 10px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.text th {
+    background: rgba(56, 189, 248, 0.1); /* Subtle accent tint */
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Styling for Markdown Code Blocks (Llama often uses these) */
+.text code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #f472b6; /* Soft pink for inline code */
+}
+
+.text pre {
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 12px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    margin: 10px 0;
+}
+
+.text pre code {
+    color: #e2e8f0;
+    background: transparent;
+    padding: 0;
+}
+
+/* Fix for spacing between paragraphs in AI responses */
+.text p {
+    margin-bottom: 10px;
+}
+
+.text p:last-child {
+    margin-bottom: 0;
+}
+
