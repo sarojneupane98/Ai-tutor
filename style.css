@@ -119,25 +119,43 @@ button { background: var(--accent); border: none; width: 40px; height: 40px; bor
     .chat-box { padding: 15px; }
     .input-area { padding-bottom: env(safe-area-inset-bottom, 15px); }
 }
-/* Styling for Markdown Lists */
+#mic-btn {
+    background: transparent;
+    color: #94a3b8; /* Dim color when inactive */
+    transition: all 0.3s ease;
+}
+
+#mic-btn.listening {
+    color: #ef4444; /* Red color when listening */
+    animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+/* Markdown Specific Styling */
+.text p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
 .text ul, .text ol {
-    padding-left: 20px;
     margin: 10px 0;
+    padding-left: 25px; /* Critical: without this, bullets are hidden */
 }
 
 .text li {
     margin-bottom: 5px;
 }
 
-/* Styling for Markdown Tables */
 .text table {
     width: 100%;
     border-collapse: collapse;
     margin: 15px 0;
-    font-size: 0.85rem;
-    background: rgba(15, 23, 42, 0.4);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    overflow: hidden;
 }
 
 .text th, .text td {
@@ -147,42 +165,13 @@ button { background: var(--accent); border: none; width: 40px; height: 40px; bor
 }
 
 .text th {
-    background: rgba(56, 189, 248, 0.1); /* Subtle accent tint */
+    background: rgba(56, 189, 248, 0.1);
     color: var(--accent);
-    font-weight: 600;
 }
 
-/* Styling for Markdown Code Blocks (Llama often uses these) */
 .text code {
-    font-family: 'JetBrains Mono', monospace;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0,0,0,0.3);
     padding: 2px 5px;
     border-radius: 4px;
-    font-size: 0.9em;
-    color: #f472b6; /* Soft pink for inline code */
+    font-family: 'JetBrains Mono', monospace;
 }
-
-.text pre {
-    background: #0f172a;
-    padding: 12px;
-    border-radius: 12px;
-    overflow-x: auto;
-    border: 1px solid var(--border);
-    margin: 10px 0;
-}
-
-.text pre code {
-    color: #e2e8f0;
-    background: transparent;
-    padding: 0;
-}
-
-/* Fix for spacing between paragraphs in AI responses */
-.text p {
-    margin-bottom: 10px;
-}
-
-.text p:last-child {
-    margin-bottom: 0;
-}
-
