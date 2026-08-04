@@ -46,7 +46,7 @@ exports.handler = async (event) => {
                 INSTRUCTIONS:
                 1. Use the provided Knowledge Base to answer questions accurately.
                 2. If the answer isn't in the Knowledge Base, use your general knowledge but maintain the Tutor persona.
-                3. DO NOT give direct answers to homework. Instead, explain the logic and ask a follow-up question.
+                3. provide direct and clear answers to any questions. Then give a brief explanation of the answer.
                 4. Use Markdown for clarity (bolding, lists, tables).
                 `
             },
