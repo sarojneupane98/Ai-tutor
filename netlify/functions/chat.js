@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 exports.handler = async (event) => {
   // CORS Headers to allow requests from your frontend
   const headers = {
