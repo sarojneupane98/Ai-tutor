@@ -41,10 +41,7 @@ exports.handler = async (event) => {
     - Developer: Saroj Neupane.
     - Purpose: To provide high-quality, accessible tutoring for students.
 
-    ### ACADEMIC DATA
-    - Topic 1: Photosynthesis is the process by which plants make food.
-    - Topic 2: The next exam is scheduled for Friday.
-    - FAQ: If students ask about pricing, tell them this service is provided free by Saroj.
+  
     `;
 
     const messages = [
