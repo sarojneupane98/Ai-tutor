@@ -36,6 +36,10 @@ async function sendMessage() {
     const text = userInput.value.trim();
     if (!text) return;
 
+    // Lock UI inputs
+    userInput.disabled = true;
+    sendBtn.disabled = true;
+
     const rawHistory = getChatHistory();
     const formattedHistory = rawHistory.slice(-6).map(msg => ({
         role: msg.className === 'user-message' ? 'user' : 'assistant',
@@ -65,6 +69,11 @@ async function sendMessage() {
     } catch (error) {
         removeLoadingIndicator(loadingId);
         addMessage("Network Error. Please check your connection.", 'ai-message');
+    } finally {
+        // Unlock UI inputs
+        userInput.disabled = false;
+        sendBtn.disabled = false;
+        userInput.focus();
     }
 }
 
