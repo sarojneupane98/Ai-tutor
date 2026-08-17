@@ -85,7 +85,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ reply: "I'm having trouble thinking right now. (Groq Error)" })
+        body: JSON.stringify({ reply: "I'm having trouble thinking right now. " })
       };
     }
 
